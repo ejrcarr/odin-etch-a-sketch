@@ -27,9 +27,15 @@
            <input type="radio" id="rainbow" name="mode" value="rainbow" id="rainbow">
            <label for="rainbow">Rainbow Mode</label><br>
         </form>
-        <div class="grid-size-container">
-            <input type="range" name="grid-size" min="1" max="64" value='16' id="grid-size">
-            <p>Grid size: <output id="value">x</output></p>
+        <div class="grid-settings">
+            <div class="grid-size-container">
+                <input type="range" name="grid-size" min="1" max="64" value='16' id="grid-size">
+                <p>Grid size: <output id="value">x</output></p>
+            </div>
+            <div class="grid-lines-container">
+                <input type="checkbox" name="grid-lines" id="grid-lines" checked>
+                <label for="grid-lines">Grid Lines</label>
+            </div>
         </div>
     </div>
     

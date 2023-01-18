@@ -11,12 +11,15 @@ const paintButton = document.querySelector('.paint-button');
 const clearButton = document.querySelector('.clear-board');
 const rainbowOption = document.getElementById('rainbow');
 const cog = document.querySelector('.fa-cog');
+const gridLinesCheck = document.getElementById('grid-lines');
 
 const DEFAULT_COLOR = '#0000ff';
 const DEFAULT_GRID = 16;
+const DEFAULT_GRIDLINES = true;
 let currentColor = DEFAULT_COLOR;
 let currentGrid = DEFAULT_GRID;
 let isEraseActive = false;
+let areGridLines = DEFAULT_GRIDLINES;
 
 colorpicker.addEventListener('input', (e) => {
 	setColor(e.target.value);
@@ -37,6 +40,8 @@ paintButton.addEventListener('click', () => {
 	isEraseActive = false;
 });
 clearButton.addEventListener('click', resetBoard);
+gridSizeInput.addEventListener('mousedown', resetBoard);
+gridLinesCheck.addEventListener('change', toggleGridLines);
 
 var mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
@@ -50,7 +55,6 @@ function initializeBoard() {
 	sketchContainer.style.gridTemplateRows = `repeat(${currentGrid}, minmax(0, 1fr))`;
 	sketchContainer.style.gridTemplateColumns = `repeat(${currentGrid}, minmax(0, 1fr))`;
 	let currAmount = sketchContainer.childElementCount;
-	// resetBoard();
 	if (currAmount > currentGrid * currentGrid) {
 		for (let i = 0; i < currAmount - currentGrid * currentGrid; i++) {
 			sketchContainer.removeChild(sketchContainer.lastChild);
@@ -82,18 +86,14 @@ function initializeBoard() {
 					e.target.style.background = `rgb(${randomR}, ${randomG}, ${randomB})`;
 				}
 			});
+			if (areGridLines) {
+				div.style.border = '.5px solid rgb(217, 217, 217)';
+			} else {
+				div.style.border = 'none';
+			}
 			sketchContainer.appendChild(div);
 		}
 	}
-	// sketchContainer.innerHTML = '';
-	// for (let i = 0; i < currentGrid * currentGrid; i++) {
-	// 	let div = document.createElement('div');
-	// 	div.classList.add('grid-square');
-	// 	div.addEventListener('mouseover', (e) => {
-	// 		if (mouseDown) e.target.style.background = currentColor;
-	// 	});
-	// 	sketchContainer.appendChild(div);
-	// }
 }
 
 function resetBoard() {
@@ -107,6 +107,18 @@ function handleSliderChange(e) {
 	value.textContent = e.target.value + ' x ' + e.target.value;
 	currentGrid = e.target.value;
 	initializeBoard();
+}
+
+function toggleGridLines() {
+	let squares = document.querySelectorAll('.grid-square');
+	areGridLines = !areGridLines;
+	squares.forEach((square) => {
+		if (areGridLines) {
+			square.style.border = '.5px solid rgb(217, 217, 217)';
+		} else {
+			square.style.border = 'none';
+		}
+	});
 }
 
 initializeBoard();
