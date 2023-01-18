@@ -6,6 +6,8 @@ value.textContent = gridSizeInput.value + ' x ' + gridSizeInput.value;
 const optionsButton = document.getElementById('options-button');
 const caret = document.querySelector('.fa-caret-down');
 const optionsDropdown = document.querySelector('.options-dropdown');
+const eraseButton = document.querySelector('.erase-button');
+const paintButton = document.querySelector('.paint-button');
 
 const DEFAULT_COLOR = '#0000ff';
 const DEFAULT_GRID = 16;
@@ -18,6 +20,8 @@ optionsButton.addEventListener('click', () => {
 	caret.classList.toggle('open-caret');
 	optionsDropdown.classList.toggle('open-options');
 });
+eraseButton.addEventListener('click', (e) => setColor('white'));
+paintButton.addEventListener('click', () => setColor(colorpicker.value));
 
 var mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
