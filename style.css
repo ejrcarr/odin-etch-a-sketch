@@ -121,6 +121,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .options .fa-cog {
     font-size: 2rem;
+    transition: transform 200ms ease-in-out;
 }
 
 .options .fa-caret-down {
@@ -131,6 +132,11 @@ input[type="color"]::-webkit-color-swatch {
 .open-caret {
     transform: rotate(-180deg);
     transition: transform 100ms ease-in-out;
+}
+
+.open-cog {
+    transform: rotate(90deg) !important;
+    transition: transform 200ms ease-in-out !important;
 }
 
 .open-options {

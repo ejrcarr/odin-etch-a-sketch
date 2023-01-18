@@ -8,20 +8,35 @@ const caret = document.querySelector('.fa-caret-down');
 const optionsDropdown = document.querySelector('.options-dropdown');
 const eraseButton = document.querySelector('.erase-button');
 const paintButton = document.querySelector('.paint-button');
+const clearButton = document.querySelector('.clear-board');
+const rainbowOption = document.getElementById('rainbow');
+const cog = document.querySelector('.fa-cog');
 
 const DEFAULT_COLOR = '#0000ff';
 const DEFAULT_GRID = 16;
 let currentColor = DEFAULT_COLOR;
 let currentGrid = DEFAULT_GRID;
+let isEraseActive = false;
 
-colorpicker.addEventListener('input', (e) => setColor(e.target.value));
+colorpicker.addEventListener('input', (e) => {
+	setColor(e.target.value);
+	isEraseActive = false;
+});
 gridSizeInput.addEventListener('input', (e) => handleSliderChange(e));
 optionsButton.addEventListener('click', () => {
 	caret.classList.toggle('open-caret');
 	optionsDropdown.classList.toggle('open-options');
+	cog.classList.toggle('open-cog');
 });
-eraseButton.addEventListener('click', (e) => setColor('white'));
-paintButton.addEventListener('click', () => setColor(colorpicker.value));
+eraseButton.addEventListener('click', () => {
+	setColor('white');
+	isEraseActive = true;
+});
+paintButton.addEventListener('click', () => {
+	setColor(colorpicker.value);
+	isEraseActive = false;
+});
+clearButton.addEventListener('click', resetBoard);
 
 var mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
@@ -35,6 +50,7 @@ function initializeBoard() {
 	sketchContainer.style.gridTemplateRows = `repeat(${currentGrid}, minmax(0, 1fr))`;
 	sketchContainer.style.gridTemplateColumns = `repeat(${currentGrid}, minmax(0, 1fr))`;
 	let currAmount = sketchContainer.childElementCount;
+	// resetBoard();
 	if (currAmount > currentGrid * currentGrid) {
 		for (let i = 0; i < currAmount - currentGrid * currentGrid; i++) {
 			sketchContainer.removeChild(sketchContainer.lastChild);
@@ -45,10 +61,26 @@ function initializeBoard() {
 			div.classList.add('grid-square');
 			div.setAttribute('draggable', false);
 			div.addEventListener('mouseover', (e) => {
-				if (mouseDown) e.target.style.background = currentColor;
+				if (mouseDown) {
+					if (!rainbowOption.checked || isEraseActive) {
+						e.target.style.background = currentColor;
+					} else {
+						let randomR = Math.floor(Math.random() * 256);
+						let randomG = Math.floor(Math.random() * 256);
+						let randomB = Math.floor(Math.random() * 256);
+						e.target.style.background = `rgb(${randomR}, ${randomG}, ${randomB})`;
+					}
+				}
 			});
 			div.addEventListener('mousedown', (e) => {
-				e.target.style.background = currentColor;
+				if (!rainbowOption.checked || isEraseActive) {
+					e.target.style.background = currentColor;
+				} else {
+					let randomR = Math.floor(Math.random() * 256);
+					let randomG = Math.floor(Math.random() * 256);
+					let randomB = Math.floor(Math.random() * 256);
+					e.target.style.background = `rgb(${randomR}, ${randomG}, ${randomB})`;
+				}
 			});
 			sketchContainer.appendChild(div);
 		}
@@ -65,8 +97,9 @@ function initializeBoard() {
 }
 
 function resetBoard() {
-	sketchContainer.childNodes.forEach((div) => {
-		div.style.background = 'white';
+	let squares = document.querySelectorAll('.grid-square');
+	squares.forEach((square) => {
+		square.style.background = 'white';
 	});
 }
 
