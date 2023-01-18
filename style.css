@@ -31,6 +31,8 @@ h1 {
 }
 
 .options-container {
+    position: relative;
+    z-index: 1000;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -85,5 +87,82 @@ input[type="color"]::-webkit-color-swatch {
     cursor: pointer;
 }
 
+
+.options button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.25rem;
+    gap: .2rem;
+}
+
+.options .fa-cog {
+    font-size: 2rem;
+}
+
+.options .fa-caret-down {
+    font-size: 1.5rem;
+    transition: transform 100ms ease-in-out;
+}
+
+.open-caret {
+    transform: rotate(-180deg);
+    transition: transform 100ms ease-in-out;
+}
+
+.open-options {
+    opacity: 1 !important;
+    top: 100px !important;
+    pointer-events: all !important;
+    z-index: 1 !important;
+    transition: opacity 200ms ease-in-out, top 200ms ease-in-out, z-index 300ms ease-in-out;
+}
+
+.options-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    top: 0px;
+    background: white;
+    padding: 10px;
+    opacity: 1;
+    width: 100vw;
+    height: 50px;
+    pointer-events: none;
+    z-index: -3;
+    transition: opacity 200ms ease-in-out, top 200ms ease-in-out;
+}
+
+.options-dropdown form {
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+}
+
+.options-dropdown form input[type='radio']{
+    margin-left: 15px;
+}
+
+label {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type='radio'] {
+    appearance: none;
+}
+
+input[type='radio']:checked + label{
+    background: black;
+    color: white;
+    transition: background 100ms ease-in-out, color 100ms ease-in-out;
+}
 
 /* Slider */

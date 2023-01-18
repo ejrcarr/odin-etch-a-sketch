@@ -13,14 +13,25 @@
     <div class="options-container">
         <h1>Etch-A-Sketch</h1>
         <div class="options">
-            <div class="grid-size-container">
-                <input type="range" name="grid-size" min="1" max="64" value='16' id="grid-size">
-                <p>Grid size: <output id="value">x</output></p>
-            </div>
+            <button class="erase-button"><i class="fa-solid fa-eraser"></i></button>
             <input type="color" id="colorpicker" value="#0000ff">
-
+            <button class="options-button" id="options-button"><i class="fa fa-cog" aria-hidden="true"></i><i class="fa fa-caret-down" aria-hidden="true"></i></butt>
         </div>
     </div>
+    <div class="options-dropdown">
+        <form action="">
+            <p>Style:</p>
+           <input type="radio" id="color" name="mode" value="color" checked>
+           <label for="color">Color Mode</label><br>
+           <input type="radio" id="rainbow" name="mode" value="rainbow">
+           <label for="rainbow">Rainbow Mode</label><br>
+        </form>
+        <div class="grid-size-container">
+            <input type="range" name="grid-size" min="1" max="64" value='16' id="grid-size">
+            <p>Grid size: <output id="value">x</output></p>
+        </div>
+    </div>
+    
     <div class="sketch-side" draggable="false">
         <div class="sketch-container" draggable="false" id="sketch-container">
 

@@ -3,6 +3,9 @@ const colorpicker = document.getElementById('colorpicker');
 const value = document.getElementById('value');
 const gridSizeInput = document.getElementById('grid-size');
 value.textContent = gridSizeInput.value + ' x ' + gridSizeInput.value;
+const optionsButton = document.getElementById('options-button');
+const caret = document.querySelector('.fa-caret-down');
+const optionsDropdown = document.querySelector('.options-dropdown');
 
 const DEFAULT_COLOR = '#0000ff';
 const DEFAULT_GRID = 16;
@@ -11,6 +14,10 @@ let currentGrid = DEFAULT_GRID;
 
 colorpicker.addEventListener('input', (e) => setColor(e.target.value));
 gridSizeInput.addEventListener('input', (e) => handleSliderChange(e));
+optionsButton.addEventListener('click', () => {
+	caret.classList.toggle('open-caret');
+	optionsDropdown.classList.toggle('open-options');
+});
 
 var mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
