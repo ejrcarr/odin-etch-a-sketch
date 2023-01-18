@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/4c19d270de.js" crossorigin="anonymous"></script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Etch-A-Sketch</title>
+</head>
+<body draggable="false">
+    <div class="options-container">
+        <h1>Etch-A-Sketch</h1>
+        <div class="options">
+            <div class="grid-size-container">
+                <input type="range" name="grid-size" min="1" max="64" value='16' id="grid-size">
+                <p>Grid size: <output id="value">x</output></p>
+            </div>
+            <input type="color" id="colorpicker" value="#0000ff">
+
+        </div>
+    </div>
+    <div class="sketch-side" draggable="false">
+        <div class="sketch-container" draggable="false" id="sketch-container">
+
+        </div>
+    </div>
+</body>
+</html>
