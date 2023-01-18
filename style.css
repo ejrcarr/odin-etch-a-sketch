@@ -40,6 +40,7 @@ h1 {
     background-color: white;
     width: 100vw;
     height: 100px;
+    min-height: 100px;
     box-shadow: inset 0 0 0 1px #dedddc, 0 0 16px 0 rgb(0 0 0 / 15%);
 }
 
@@ -54,8 +55,8 @@ h1 {
     display: grid;
     grid-template-columns: repeat(16, minmax(0, 1fr));
     grid-template-rows: repeat(16, minmax(0, 1fr));
-    height: clamp(300px, 50vw, 525px);
-    width: clamp(300px, 50vw, 525px);
+    height: clamp(350px, 50vw, 525px);
+    width: clamp(350px, 50vw, 525px);
     place-content: center;
     padding: 1rem;
     margin-top: 2rem;
@@ -238,18 +239,19 @@ input[type="checkbox"]:checked::before {
 @media screen and (max-width: 600px) {
     .options-dropdown {
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
         height: 100px;
     }
     .options i {
-        font-size: 1.25rem;
+        font-size: 1.5rem;
     }
 
     .options {
-        gap: 1rem;
+        gap: 1.25rem;
     }
 
     .sketch-container {
-        padding: 0;
+        /* padding: 0; */
+        margin-top: -125px;
     }
 }
